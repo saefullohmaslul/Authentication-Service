@@ -2,13 +2,13 @@ version: '3'
 services:
   postgres:
     image: postgres:11
-    container_name: boilerplate_db
+    container_name: authentication_db
     volumes:
-      - boilerplate_service:/var/libs/postgresql/data
+      - authentication_service:/var/libs/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=developer
-      - POSTGRES_DB=boilerplate_db
+      - POSTGRES_DB=authentication_db
       - POSTGRES_PORT=5432
     ports:
       - 5432:5432
@@ -17,7 +17,7 @@ services:
 
   app_service:
     image: node:11
-    container_name: boilerplate_service
+    container_name: authentication_service
     build: .
     depends_on:
       - postgres
@@ -127,7 +127,7 @@ services:
         SWAGGER_JSON: /openapi.json
 
 volumes:
-  boilerplate_service:
+  authentication_service:
   apm_server:
   kibana:
 

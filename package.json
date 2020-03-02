@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate-service",
+  "name": "authentication-service",
   "version": "0.0.1",
-  "description": "basic boilerplate",
+  "description": "basic authentication service",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
@@ -32,7 +32,7 @@
   },
   "keywords": [
     "microservice",
-    "boilerplate"
+    "authentication"
   ],
   "author": "Saefulloh Maslul",
   "license": "MIT",
@@ -60,6 +60,7 @@
     "supertest": "^4.0.2",
     "ts-node": "^8.6.2",
     "tslib": "^1.11.1",
+    "typeorm": "^0.2.24",
     "typescript": "^3.8.3"
   }
 }
