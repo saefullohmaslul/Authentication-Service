@@ -27,8 +27,32 @@
       "jest"
     ],
     "paths": {
-      "@/*": [
-        "src/*"
+      "app/*": [
+        "app/*"
+      ],
+      "schema": [
+        "schema"
+      ],
+      "utils/*": [
+        "utils/*"
+      ],
+      "database/*": [
+        "database/*"
+      ],
+      "controllers/*": [
+        "controllers/*"
+      ],
+      "services/*": [
+        "services/*"
+      ],
+      "repositories/*": [
+        "repositories/*"
+      ],
+      "pubsub/*": [
+        "pubsub/*"
+      ],
+      "routes/*": [
+        "routes/*"
       ]
     },
     "plugins": [

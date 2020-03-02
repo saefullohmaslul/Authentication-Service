@@ -1,0 +1,7 @@
+{
+  "watch": [
+    "src"
+  ],
+  "ext": "ts",
+  "exec": "cross-env DEBUG=server* node ./dist/index.js"
+}
