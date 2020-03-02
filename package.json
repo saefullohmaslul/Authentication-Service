@@ -16,7 +16,8 @@
     "migration:create": "cross-env sh scripts/migration.sh",
     "migrate:local": "cross-env NODE_ENV=development sh scripts/migrate.sh",
     "seeder:create": "cross-env NODE_ENV=development sh scripts/seeder.sh",
-    "seed": "cross-env NODE_ENV=development sh scripts/seed.sh"
+    "seed": "cross-env NODE_ENV=development sh scripts/seed.sh",
+    "prepush": "npm run test"
   },
   "_moduleAliases": {
     "schema": "./dist/schema",
