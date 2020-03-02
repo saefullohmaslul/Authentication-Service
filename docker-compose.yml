@@ -4,7 +4,7 @@ services:
     image: postgres:11
     container_name: boilerplate_db
     volumes:
-      - vendor_service:/var/libs/postgresql/data
+      - boilerplate_service:/var/libs/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=developer
@@ -122,12 +122,12 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./.docs/swagger/openapi.json:/openapi.json
+      - ./.docs/swagger/openapi.json
     environment:
         SWAGGER_JSON: /openapi.json
 
 volumes:
-  vendor_service:
+  boilerplate_service:
   apm_server:
   kibana:
 
