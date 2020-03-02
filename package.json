@@ -1,0 +1,15 @@
+{
+  "name": "boilerplate-service",
+  "version": "0.0.1",
+  "description": "basic boilerplate",
+  "main": "dist/app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "microservice",
+    "boilerplate"
+  ],
+  "author": "Saefulloh Maslul",
+  "license": "MIT"
+}
