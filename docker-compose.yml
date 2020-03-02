@@ -1,0 +1,136 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:11
+    container_name: boilerplate_db
+    volumes:
+      - vendor_service:/var/libs/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=developer
+      - POSTGRES_DB=boilerplate_db
+      - POSTGRES_PORT=5432
+    ports:
+      - 5432:5432
+    networks:
+      - net
+
+  app_service:
+    image: node:11
+    container_name: boilerplate_service
+    build: .
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    environment:
+      DB_HOST: localhost
+    volumes:
+      - .:/app/
+    ports:
+      - 6010:6010
+    working_dir: /app/
+    network_mode: host
+    command: npm run start:watch
+
+  redis:
+    image: redis
+    volumes:
+      - ./var/libs/redis
+    restart: always
+    command: ["redis-server", "--bind", "redis", "--port", "6379"]
+    networks:
+      - net
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
+    container_name: elasticsearch
+    environment:
+      - cluster.name=elasticsearch
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - transport.host=0.0.0.0
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - ELASTIC_USERNAME=developer
+      - ELASTIC_PASSWORD=developer
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - net
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.5.0
+    depends_on:
+      - elasticsearch
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_USERNAME: developer
+      ELASTIC_PASSWORD: developer
+      ELASTICSEARCH_HOST_PORT: elasticsearch:9200
+    ports:
+      - 5000:5000
+      - 9600:9600
+    volumes:
+      - ./usr/share/logstash/data
+    networks:
+      - net
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.5.0
+    depends_on:
+      - logstash
+    volumes:
+      - kibana:/usr/share/kibana/data
+    environment:
+      ELASTIC_USERNAME: developer
+      ELASTIC_PASSWORD: developer
+      ELASTICSEARCH_HOST_PORT: elasticsearch:9200
+    ports:
+      - 5601:5601
+    networks:
+      - net
+
+  apm-server:
+    image: docker.elastic.co/apm/apm-server:7.5.0
+    ports:
+      - "8200:8200"
+      - "8201:8200"
+    environment:
+      - apm-server.host=0.0.0.0
+      - ELASTIC_USERNAME=developer
+      - ELASTIC_PASSWORD=developer
+      - ELASTICSEARCH_HOST_PORT=elasticsearch:9200
+    volumes:
+      - apm_server:/usr/share/apm-server
+    networks:
+      - net
+    depends_on:
+      - elasticsearch
+      - kibana
+
+  swagger:
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./.docs/swagger/openapi.json:/openapi.json
+    environment:
+        SWAGGER_JSON: /openapi.json
+
+volumes:
+  vendor_service:
+  apm_server:
+  kibana:
+
+networks:
+  net:
+    driver: bridge
