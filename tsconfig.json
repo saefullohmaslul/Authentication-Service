@@ -48,9 +48,6 @@
       "repositories/*": [
         "repositories/*"
       ],
-      "pubsub/*": [
-        "pubsub/*"
-      ],
       "routes/*": [
         "routes/*"
       ]

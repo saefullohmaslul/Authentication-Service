@@ -26,7 +26,6 @@
     "controllers": "./dist/controllers",
     "services": "./dist/services",
     "repositories": "./dist/repositories",
-    "pubsub": "./dist/pubsub",
     "helpers": "./dist/helpers",
     "routes": "./dist/routes"
   },
