@@ -17,7 +17,8 @@
     "migrate:local": "cross-env NODE_ENV=development sh scripts/migrate.sh",
     "seeder:create": "cross-env NODE_ENV=development sh scripts/seeder.sh",
     "seed": "cross-env NODE_ENV=development sh scripts/seed.sh",
-    "prepush": "npm run test"
+    "prepush": "npm run test",
+    "typeorm": "typeorm --config dist/app/config/db/db-init.config.js"
   },
   "_moduleAliases": {
     "schema": "./dist/schema",

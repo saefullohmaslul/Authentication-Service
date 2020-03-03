@@ -1,3 +1,4 @@
+require('module-alias/register')
 import config from '..'
 import { ConnectionOptions } from 'typeorm'
 import path from 'path'

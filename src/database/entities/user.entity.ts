@@ -42,7 +42,8 @@ export const UserEntity: EntitySchema<IUserEntity> = new EntitySchema<IUserEntit
       default: true
     },
     phone_number: {
-      type: 'int'
+      type: 'varchar',
+      length: 20
     },
     created_at: {
       name: 'created_at',
