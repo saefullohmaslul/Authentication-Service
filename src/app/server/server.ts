@@ -3,7 +3,9 @@ import express, { Express } from 'express'
 import { createServer, Server as HTTPServer } from 'http'
 import config from 'app/config'
 import { Middleware } from 'app/middlewares'
+import { DatabaseConnection } from 'app/config/db/db-connection.config'
 const routes = require('routes/routes')
+const dbInit = require('app/config/db/db-init.config')
 
 export class Server {
   private server?: Express
@@ -19,8 +21,14 @@ export class Server {
     this.httpServer = createServer(this.server)
     this.setupMiddleware(this.server)
     this.setupRoutes(this.server)
+    await this.databaseConnection()
 
     return this.server
+  }
+
+  private async databaseConnection() {
+    const database = new DatabaseConnection()
+    return database.initialize(dbInit)
   }
 
   private setupMiddleware(server: Express): void {
