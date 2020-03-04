@@ -1,52 +1,49 @@
-import { EntitySchema, EntitySchemaColumnOptions } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToMany, ManyToOne } from 'typeorm'
+import { UserEntity } from '.'
 
 export interface IResetPasswordEntity {
   id: string,
-  user: string,
+  user_id: string,
   token: string,
   created_at: Date,
   updated_at: Date,
   deleted_at: Date
 }
 
-export const ResetPasswordEntity: EntitySchema<IResetPasswordEntity> = new EntitySchema<IResetPasswordEntity>({
-  name: 'reset_password',
-  tableName: 'tbl_reset_password',
-  columns: {
-    id: {
-      type: 'uuid',
-      primary: true,
-      generated: true
-    },
-    token: {
-      type: 'varchar',
-      nullable: false
-    },
-    created_at: {
-      name: 'created_at',
-      type: 'timestamp',
-      createDate: true
-    } as EntitySchemaColumnOptions,
-    updated_at: {
-      name: 'updated_at',
-      type: 'timestamp',
-      updateDate: true
-    } as EntitySchemaColumnOptions,
-    deleted_at: {
-      name: 'deleted_at',
-      type: 'timestamp',
-      deleteDate: true
-    } as EntitySchemaColumnOptions
-  },
-  relations: {
-    user: {
-      type: 'many-to-one',
-      target: 'user',
-      joinColumn: {
-        name: 'user_id'
-      },
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE'
-    }
-  }
-})
+@Entity()
+export class ResetPasswordEntity implements IResetPasswordEntity {
+  @PrimaryGeneratedColumn({
+    type: 'uuid',
+    zerofill: false
+  })
+  id: string
+
+  @Column({
+    type: 'varchar',
+    nullable: false
+  })
+  token: string
+
+  @CreateDateColumn({
+    name: 'created_at',
+    type: 'timestamp',
+    default: 'CURRENT_TIMESTAMP'
+  })
+  created_at: Date
+
+  @UpdateDateColumn({
+    name: 'updated_at',
+    type: 'timestamp',
+    default: 'CURRENT_TIMESTAMP'
+  })
+  updated_at: Date
+
+  @DeleteDateColumn({
+    type: 'timestamp',
+    name: 'deleted_at'
+  })
+  deleted_at: Date
+
+  @ManyToOne(type => UserEntity, user => user.reset_password)
+  user_id: string
+}

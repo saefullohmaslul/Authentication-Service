@@ -1,72 +1,79 @@
-import { EntitySchema, EntitySchemaColumnOptions } from 'typeorm'
-import { IResetPasswordEntity } from '.'
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from 'typeorm'
+import { ResetPasswordEntity } from '.'
 
 export interface IUserEntity {
-  id: number,
+  id: string,
   username: string,
   first_name: string,
   last_name: string,
   is_active: boolean,
-  phone_number: number,
+  phone_number: string,
   created_at: Date,
   updated_at: Date,
   deleted_at: Date,
-  reset_password: IResetPasswordEntity
+  reset_password: ResetPasswordEntity[]
 }
 
-export const UserEntity: EntitySchema<IUserEntity> = new EntitySchema<IUserEntity>({
-  name: 'user',
-  tableName: 'tbl_users',
-  columns: {
-    id: {
-      type: "uuid",
-      primary: true,
-      generated: true
-    },
-    username: {
-      type: 'varchar',
-      unique: true,
-      nullable: false,
-      length: 50
-    },
-    first_name: {
-      type: 'varchar',
-      length: 50
-    },
-    last_name: {
-      type: 'varchar',
-      length: 50
-    },
-    is_active: {
-      type: 'boolean',
-      default: true
-    },
-    phone_number: {
-      type: 'varchar',
-      length: 20
-    },
-    created_at: {
-      name: 'created_at',
-      type: 'timestamp',
-      createDate: true
-    } as EntitySchemaColumnOptions,
-    updated_at: {
-      name: 'updated_at',
-      type: 'timestamp',
-      updateDate: true
-    } as EntitySchemaColumnOptions,
-    deleted_at: {
-      name: 'deleted_at',
-      type: 'timestamp',
-      deleteDate: true
-    } as EntitySchemaColumnOptions
-  },
-  relations: {
-    reset_password: {
-      type: 'one-to-many',
-      target: 'reset_password',
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE'
-    }
-  }
-})
+@Entity()
+export class UserEntity implements IUserEntity {
+  @PrimaryGeneratedColumn({
+    type: 'uuid',
+    zerofill: false
+  })
+  id: string
+
+  @Column({
+    type: 'varchar',
+    unique: true,
+    nullable: false,
+    length: 50
+  })
+  username: string
+
+  @Column({
+    type: 'varchar',
+    length: 50
+  })
+  first_name: string
+
+  @Column({
+    type: 'varchar',
+    length: 50
+  })
+  last_name: string
+
+  @Column({
+    type: 'boolean',
+    default: true
+  })
+  is_active: boolean
+
+  @Column({
+    type: 'varchar',
+    length: 20
+  })
+  phone_number: string
+
+  @CreateDateColumn({
+    name: 'created_at',
+    type: 'timestamp',
+    default: 'CURRENT_TIMESTAMP'
+  })
+  created_at: Date
+
+  @UpdateDateColumn({
+    name: 'updated_at',
+    type: 'timestamp',
+    default: 'CURRENT_TIMESTAMP'
+  })
+  updated_at: Date
+
+  @DeleteDateColumn({
+    type: 'timestamp',
+    name: 'deleted_at'
+  })
+  deleted_at: Date
+
+  @OneToMany(type => ResetPasswordEntity, reset_password => reset_password.user_id)
+  reset_password: ResetPasswordEntity[]
+}
