@@ -10,8 +10,7 @@ export class UserMigration1583235914727 implements MigrationInterface {
             name: 'id',
             type: 'uuid',
             isPrimary: true,
-            isGenerated: true,
-            generationStrategy: 'uuid'
+            isGenerated: true
           },
           {
             name: 'username',
@@ -36,15 +35,17 @@ export class UserMigration1583235914727 implements MigrationInterface {
           },
           {
             name: 'created_at',
-            type: 'time with time zone'
+            type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP'
           },
           {
             name: 'updated_at',
-            type: 'time with time zone'
+            type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP'
           },
           {
             name: 'deleted_at',
-            type: 'time with time zone'
+            type: 'timestamp'
           }
         ]
       }),

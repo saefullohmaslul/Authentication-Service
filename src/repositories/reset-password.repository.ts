@@ -1,8 +1,7 @@
-import { EntityRepository } from 'typeorm'
-import { ResetPaswordEntity, IResetPasswordEntity } from 'database/entities'
-import { BaseRepository } from '.'
+import { EntityRepository, Repository } from 'typeorm'
+import { ResetPasswordEntity, IResetPasswordEntity } from 'database/entities'
 
-@EntityRepository(ResetPaswordEntity)
-export default class ResetPaswordRepository extends BaseRepository<IResetPasswordEntity> {
+@EntityRepository(ResetPasswordEntity)
+export default class ResetPaswordRepository extends Repository<IResetPasswordEntity> {
 
 }

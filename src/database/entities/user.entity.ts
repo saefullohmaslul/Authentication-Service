@@ -47,17 +47,17 @@ export const UserEntity: EntitySchema<IUserEntity> = new EntitySchema<IUserEntit
     },
     created_at: {
       name: 'created_at',
-      type: 'time with time zone',
+      type: 'timestamp',
       createDate: true
     } as EntitySchemaColumnOptions,
     updated_at: {
       name: 'updated_at',
-      type: 'time with time zone',
+      type: 'timestamp',
       updateDate: true
     } as EntitySchemaColumnOptions,
     deleted_at: {
       name: 'deleted_at',
-      type: 'time with time zone',
+      type: 'timestamp',
       deleteDate: true
     } as EntitySchemaColumnOptions
   },

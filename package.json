@@ -18,7 +18,8 @@
     "seeder:create": "cross-env NODE_ENV=development sh scripts/seeder.sh",
     "seed": "cross-env NODE_ENV=development sh scripts/seed.sh",
     "prepush": "npm run test",
-    "typeorm": "typeorm --config dist/app/config/db/db-init.config.js"
+    "typeorm": "typeorm --config dist/app/config/db/db-init.config.js",
+    "migration": "node scripts/migration.js"
   },
   "_moduleAliases": {
     "schema": "./dist/schema",
@@ -49,7 +50,9 @@
     "@types/express": "^4.17.2",
     "@types/node": "^13.7.7",
     "@types/supertest": "^2.0.8",
+    "@types/uuid": "^7.0.0",
     "body-parser": "^1.19.0",
+    "capitalize": "^2.0.2",
     "cross-env": "^7.0.0",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
@@ -62,6 +65,7 @@
     "ts-node": "^8.6.2",
     "tslib": "^1.11.1",
     "typeorm": "^0.2.24",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "uuid": "^7.0.1"
   }
 }

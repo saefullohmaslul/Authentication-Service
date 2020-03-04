@@ -11,8 +11,6 @@ const options: ConnectionOptions = {
   password: config.database.password,
   database: config.database.database,
   logging: config.database.logging,
-  synchronize: true,
-  dropSchema: true,
   cli: {
     entitiesDir: path.join(__dirname, '..', '..', '..', 'database', 'entities'),
     migrationsDir: path.join(__dirname, '..', '..', '..', 'database', 'migrations'),
