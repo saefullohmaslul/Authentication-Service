@@ -9,7 +9,7 @@ export interface IResetPasswordEntity {
   deleted_at: Date
 }
 
-export const ResetPaswordEntity: EntitySchema<IResetPasswordEntity> = new EntitySchema<IResetPasswordEntity>({
+export const ResetPasswordEntity: EntitySchema<IResetPasswordEntity> = new EntitySchema<IResetPasswordEntity>({
   name: 'reset_password',
   tableName: 'tbl_reset_password',
   columns: {
@@ -24,17 +24,17 @@ export const ResetPaswordEntity: EntitySchema<IResetPasswordEntity> = new Entity
     },
     created_at: {
       name: 'created_at',
-      type: 'time with time zone',
+      type: 'timestamp',
       createDate: true
     } as EntitySchemaColumnOptions,
     updated_at: {
       name: 'updated_at',
-      type: 'time with time zone',
+      type: 'timestamp',
       updateDate: true
     } as EntitySchemaColumnOptions,
     deleted_at: {
       name: 'deleted_at',
-      type: 'time with time zone',
+      type: 'timestamp',
       deleteDate: true
     } as EntitySchemaColumnOptions
   },
