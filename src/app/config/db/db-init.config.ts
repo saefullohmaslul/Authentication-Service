@@ -1,8 +1,11 @@
+import 'reflect-metadata'
 require('module-alias/register')
 import config from '..'
 import path from 'path'
+import { ConnectionOptions } from 'typeorm'
 
-const options = {
+const options: ConnectionOptions = {
+  name: 'authConnection',
   type: 'postgres',
   host: config.database.host,
   port: config.database.port,
@@ -10,6 +13,8 @@ const options = {
   password: config.database.password,
   database: config.database.database,
   logging: config.database.logging,
+  // synchronize: true,
+  // dropSchema: true,
   cli: {
     entitiesDir: path.join(__dirname, '..', '..', '..', 'database', 'entities'),
     migrationsDir: path.join(__dirname, '..', '..', '..', 'database', 'migrations'),
@@ -17,9 +22,7 @@ const options = {
   },
   entities: [path.join(__dirname, '..', '..', '..', 'database', 'entities', '*.js')],
   migrations: [path.join(__dirname, '..', '..', '..', 'database', 'migrations', '*.js')],
-  subscribers: [path.join(__dirname, '..', '..', '..', 'database', 'subscribers', '*.js')],
-  seeds: [path.join(__dirname, '..', '..', '..', 'database', 'seeds', '*seed.js')],
-  factories: [path.join(__dirname, '..', '..', '..', 'database', 'factories', '*factory.js')]
+  subscribers: [path.join(__dirname, '..', '..', '..', 'database', 'subscribers', '*.js')]
 }
 
 module.exports = options

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToMany, ManyToOne } from 'typeorm'
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne } from 'typeorm'
 import { UserEntity } from '.'
 
 export interface IResetPasswordEntity {
@@ -10,11 +10,14 @@ export interface IResetPasswordEntity {
   deleted_at: Date
 }
 
-@Entity()
-export class ResetPasswordEntity implements IResetPasswordEntity {
-  @PrimaryGeneratedColumn({
+@Entity({
+  name: 'tbl_reset_password'
+})
+export class ResetPasswordEntity {
+  @Column({
     type: 'uuid',
-    zerofill: false
+    generated: 'uuid',
+    primary: true
   })
   id: string
 
@@ -26,15 +29,13 @@ export class ResetPasswordEntity implements IResetPasswordEntity {
 
   @CreateDateColumn({
     name: 'created_at',
-    type: 'timestamp',
-    default: 'CURRENT_TIMESTAMP'
+    type: 'timestamp'
   })
   created_at: Date
 
   @UpdateDateColumn({
     name: 'updated_at',
-    type: 'timestamp',
-    default: 'CURRENT_TIMESTAMP'
+    type: 'timestamp'
   })
   updated_at: Date
 

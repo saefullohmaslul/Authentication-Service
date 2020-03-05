@@ -21,7 +21,6 @@ export class Server {
     this.httpServer = createServer(this.server)
     this.setupMiddleware(this.server)
     this.setupRoutes(this.server)
-    await this.databaseConnection()
 
     return this.server
   }

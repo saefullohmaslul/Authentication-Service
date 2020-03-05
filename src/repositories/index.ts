@@ -1,9 +1,6 @@
-import { ResetPasswordRepository } from './reset-password.repository'
-import { UserRepository } from './user.repository'
-import { UserEntity, ResetPasswordEntity } from 'database/entities'
-import { getManager, createConnection } from 'typeorm'
-const dbInit = require('app/config/db/db-init.config')
+import { getManager } from 'typeorm'
 
-createConnection(dbInit)
-export const userRepository = getManager().getRepository(UserEntity)
-export const resetPasswordRepository = getManager().getRepository(ResetPasswordEntity)
+import { UserEntity, ResetPasswordEntity } from 'database/entities'
+
+export const userRepository = getManager('authConnection').getRepository<UserEntity>(UserEntity)
+export const resetPasswordRepository = getManager('authConnection').getCustomRepository(ResetPasswordEntity)
