@@ -1,10 +1,8 @@
 import { Router } from 'express'
-import { AuthController } from 'controllers/authentication.controller'
-
-const controller = new AuthController()
+import { authenticationController } from 'controllers/container'
 
 const router = Router()
 
-router.get('/index', controller.index)
+router.get('/index', authenticationController.index)
 
 module.exports = router

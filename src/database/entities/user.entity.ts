@@ -1,5 +1,6 @@
 import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from 'typeorm'
 import { ResetPasswordEntity } from '.'
+import { injectable } from 'inversify'
 
 export interface IUserEntity {
   id?: string,
@@ -14,6 +15,7 @@ export interface IUserEntity {
   reset_passwords?: ResetPasswordEntity[]
 }
 
+@injectable()
 @Entity({
   name: 'tbl_users'
 })

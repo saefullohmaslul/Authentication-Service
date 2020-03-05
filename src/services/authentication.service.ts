@@ -1,13 +1,17 @@
 import { getManager, Repository } from 'typeorm'
 import { UserEntity } from 'database/entities'
+import { injectable, inject } from 'inversify'
+import { UserRepository } from 'repositories/user.repository'
 
+@injectable()
 export class AuthenticationService {
-  private userRepository: Repository<UserEntity>
-  constructor(userEntity: { new(): UserEntity }) {
-    this.userRepository = getManager().getRepository(userEntity)
+  private userRepository: UserRepository
+  constructor(
+    @inject(UserRepository) userRepository: UserRepository) {
+    this.userRepository = userRepository
   }
 
   public getAllUser() {
-    return this.userRepository.find()
+    return this.userRepository.getAll()
   }
 }
