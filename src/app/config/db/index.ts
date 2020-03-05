@@ -17,8 +17,8 @@ const options: ConnectionOptions = {
     entitiesDir: path.join(__dirname, '..', '..', '..', 'database', 'entities'),
     migrationsDir: path.join(__dirname, '..', '..', '..', 'database', 'migrations')
   },
-  entities: [path.join(__dirname, '..', '..', '..', 'database', 'entities', '**', '*entity.js')],
-  migrations: [path.join(__dirname, '..', '..', '..', 'database', 'migrations', '**', '*migration.js')]
+  entities: [path.join(__dirname, '..', '..', '..', 'database', 'entities', '*.js')],
+  migrations: [path.join(__dirname, '..', '..', '..', 'database', 'migrations', '*.js')]
 }
 
 module.exports = options

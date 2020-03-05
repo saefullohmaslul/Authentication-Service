@@ -16,10 +16,11 @@
     "migrate:local": "cross-env NODE_ENV=development sh scripts/migrate.sh",
     "seeder:create": "cross-env NODE_ENV=development sh scripts/seeder.sh",
     "prepush": "npm run test",
-    "typeorm": "typeorm --config dist/app/config/db",
+    "typeorm": "typeorm --config dist/app/config/db/index.js",
     "migration:create": "node scripts/migration.js",
+    "migration:run": "npm run typeorm migration:run",
     "seed:run": "node ./dist/database/seeds/index.js",
-    "seed": "node ./node_modules/typeorm-seeding/dist/cli.js --config dist/app/config/db seed"
+    "seed": "node ./node_modules/typeorm-seeding/dist/cli.js --config dist/app/config/db/index.js seed"
   },
   "_moduleAliases": {
     "schema": "./dist/schema",

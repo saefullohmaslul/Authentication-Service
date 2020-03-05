@@ -33,7 +33,8 @@ export class ResetPasswordMigration1583313917219 implements MigrationInterface {
           },
           {
             name: 'deleted_at',
-            type: 'timestamp'
+            type: 'timestamp',
+            isNullable: true
           },
         ]
       }),

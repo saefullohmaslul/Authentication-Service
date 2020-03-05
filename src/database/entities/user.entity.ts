@@ -11,7 +11,7 @@ export interface IUserEntity {
   created_at?: Date,
   updated_at?: Date,
   deleted_at?: Date,
-  reset_password?: ResetPasswordEntity[]
+  reset_passwords?: ResetPasswordEntity[]
 }
 
 @Entity({
@@ -76,5 +76,5 @@ export class UserEntity implements IUserEntity {
   deleted_at: Date
 
   @OneToMany(type => ResetPasswordEntity, reset_password => reset_password.user_id)
-  reset_password: ResetPasswordEntity[]
+  reset_passwords: ResetPasswordEntity[]
 }

@@ -1,4 +1,4 @@
-import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne } from 'typeorm'
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm'
 import { UserEntity } from '.'
 
 export interface IResetPasswordEntity {
@@ -45,6 +45,7 @@ export class ResetPasswordEntity implements IResetPasswordEntity {
   })
   deleted_at: Date
 
-  @ManyToOne(type => UserEntity, user => user.reset_password)
+  @ManyToOne(type => UserEntity, user => user.reset_passwords)
+  @JoinColumn({ name: 'user_id' })
   user_id: string
 }

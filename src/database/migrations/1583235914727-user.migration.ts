@@ -29,6 +29,11 @@ export class UserMigration1583235914727 implements MigrationInterface {
             length: '50'
           },
           {
+            name: 'is_active',
+            type: 'boolean',
+            default: true
+          },
+          {
             name: 'phone_number',
             type: 'varchar',
             length: '20'
@@ -45,14 +50,14 @@ export class UserMigration1583235914727 implements MigrationInterface {
           },
           {
             name: 'deleted_at',
-            type: 'timestamp'
+            type: 'timestamp',
+            isNullable: true
           }
         ]
       }),
       true
     )
   }
-
   async down(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.dropTable('tbl_users')
   }
