@@ -16,10 +16,10 @@
     "migrate:local": "cross-env NODE_ENV=development sh scripts/migrate.sh",
     "seeder:create": "cross-env NODE_ENV=development sh scripts/seeder.sh",
     "prepush": "npm run test",
-    "typeorm": "typeorm --config dist/app/config/db/db-init.config.js",
+    "typeorm": "typeorm --config dist/app/config/db",
     "migration:create": "node scripts/migration.js",
     "seed:run": "node ./dist/database/seeds/index.js",
-    "seed": "node ./node_modules/typeorm-seeding/dist/cli.js --config dist/app/config/db/db-init.config.js seed"
+    "seed": "node ./node_modules/typeorm-seeding/dist/cli.js --config dist/app/config/db seed"
   },
   "_moduleAliases": {
     "schema": "./dist/schema",
@@ -59,6 +59,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
+    "inversify": "^5.0.1",
     "module-alias": "^2.2.2",
     "npm-run-all": "^4.1.5",
     "pg": "^7.18.2",
@@ -67,8 +68,10 @@
     "supertest": "^4.0.2",
     "ts-node": "^8.6.2",
     "tslib": "^1.11.1",
+    "typedi": "^0.8.0",
     "typeorm": "^0.2.24",
     "typeorm-seeding": "^1.2.0",
+    "typeorm-typedi-extensions": "^0.2.3",
     "typescript": "^3.8.3",
     "uuid": "^7.0.2"
   }

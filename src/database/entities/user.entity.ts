@@ -2,22 +2,22 @@ import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, O
 import { ResetPasswordEntity } from '.'
 
 export interface IUserEntity {
-  id: string,
-  username: string,
-  first_name: string,
-  last_name: string,
-  is_active: boolean,
-  phone_number: string,
-  created_at: Date,
-  updated_at: Date,
-  deleted_at: Date,
-  reset_password: ResetPasswordEntity[]
+  id?: string,
+  username?: string,
+  first_name?: string,
+  last_name?: string,
+  is_active?: boolean,
+  phone_number?: string,
+  created_at?: Date,
+  updated_at?: Date,
+  deleted_at?: Date,
+  reset_password?: ResetPasswordEntity[]
 }
 
 @Entity({
   name: 'tbl_users'
 })
-export class UserEntity {
+export class UserEntity implements IUserEntity {
   @Column({
     type: 'uuid',
     generated: 'uuid',

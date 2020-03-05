@@ -36,7 +36,7 @@ const createMigration = () => {
     migration += `    await queryRunner.dropTable('tbl_users')\n`
     migration += `  }\n`
     migration += `}\n`
-    fs.writeFile(path.join(__dirname, '..', 'src', 'database', 'migrations', `${Date.now()}-${name}.ts`), migration, (err) => {
+    fs.writeFile(path.join(__dirname, '..', 'src', 'database', 'migrations', `${Date.now()}-${name}.migration.ts`), migration, (err) => {
       if (err) throw err
     })
   } catch (error) {

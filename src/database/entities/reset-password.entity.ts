@@ -2,18 +2,18 @@ import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, M
 import { UserEntity } from '.'
 
 export interface IResetPasswordEntity {
-  id: string,
-  user_id: string,
-  token: string,
-  created_at: Date,
-  updated_at: Date,
-  deleted_at: Date
+  id?: string,
+  user_id?: string,
+  token?: string,
+  created_at?: Date,
+  updated_at?: Date,
+  deleted_at?: Date
 }
 
 @Entity({
   name: 'tbl_reset_password'
 })
-export class ResetPasswordEntity {
+export class ResetPasswordEntity implements IResetPasswordEntity {
   @Column({
     type: 'uuid',
     generated: 'uuid',

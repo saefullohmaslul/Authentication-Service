@@ -3,9 +3,8 @@ import express, { Express } from 'express'
 import { createServer, Server as HTTPServer } from 'http'
 import config from 'app/config'
 import { Middleware } from 'app/middlewares'
-import { DatabaseConnection } from 'app/config/db/db-connection.config'
+import { createConnection } from 'typeorm'
 const routes = require('routes/routes')
-const dbInit = require('app/config/db/db-init.config')
 
 export class Server {
   private server?: Express
@@ -17,17 +16,15 @@ export class Server {
   }
 
   private async initialize(): Promise<Express> {
-    this.server = express()
-    this.httpServer = createServer(this.server)
-    this.setupMiddleware(this.server)
-    this.setupRoutes(this.server)
+    const dbInit = require('app/config/db')
+    return createConnection(dbInit).then(() => {
+      this.server = express()
+      this.httpServer = createServer(this.server)
+      this.setupMiddleware(this.server)
+      this.setupRoutes(this.server)
 
-    return this.server
-  }
-
-  private async databaseConnection() {
-    const database = new DatabaseConnection()
-    return database.initialize(dbInit)
+      return this.server
+    })
   }
 
   private setupMiddleware(server: Express): void {
