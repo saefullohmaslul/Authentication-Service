@@ -1,9 +1,8 @@
 require('module-alias/register')
 import config from '..'
-import { ConnectionOptions } from 'typeorm'
 import path from 'path'
 
-const options: ConnectionOptions = {
+const options = {
   type: 'postgres',
   host: config.database.host,
   port: config.database.port,
@@ -18,7 +17,9 @@ const options: ConnectionOptions = {
   },
   entities: [path.join(__dirname, '..', '..', '..', 'database', 'entities', '*.js')],
   migrations: [path.join(__dirname, '..', '..', '..', 'database', 'migrations', '*.js')],
-  subscribers: [path.join(__dirname, '..', '..', '..', 'database', 'subscribers', '*.js')]
+  subscribers: [path.join(__dirname, '..', '..', '..', 'database', 'subscribers', '*.js')],
+  seeds: [path.join(__dirname, '..', '..', '..', 'database', 'seeds', '*seed.js')],
+  factories: [path.join(__dirname, '..', '..', '..', 'database', 'factories', '*factory.js')]
 }
 
 module.exports = options

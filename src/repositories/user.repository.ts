@@ -1,7 +1,7 @@
-import { EntityRepository, Repository } from 'typeorm'
 import { UserEntity } from 'database/entities'
+import { BaseRepository } from './repository'
 
-@EntityRepository(UserEntity)
-export default class UserRepository extends Repository<UserEntity> {
+
+export class UserRepository extends BaseRepository<UserEntity> {
 
 }
