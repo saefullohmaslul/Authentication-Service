@@ -1,17 +1,24 @@
-import { Repository, getRepository } from 'typeorm'
+import { getRepository } from 'typeorm'
 import { UserEntity } from 'database/entities'
-import { injectable, inject } from 'inversify'
+import { injectable, inject, interfaces } from 'inversify'
+import { DBClient } from 'database/connection.database'
 
 @injectable()
 export class UserRepository {
-  private userRepository: Repository<UserEntity>
-  constructor(
-    @inject(UserEntity) userEntity: typeof UserEntity
+  private _dbProvider: interfaces.Provider<DBClient>
+
+  public constructor(
+    @inject("Provider<DBClient>") provider: interfaces.Provider<DBClient>
   ) {
-    this.userRepository = getRepository(userEntity)
+    this._dbProvider = provider
   }
 
-  public getAll() {
-    return this.userRepository.find()
+  private async getDB() {
+    return Promise.resolve(await this._dbProvider() as DBClient)
+  }
+
+  public async getAll() {
+    await this.getDB()
+    return getRepository(UserEntity).find()
   }
 }

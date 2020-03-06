@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { AuthenticationService } from 'services/authentication.service'
-import { UserEntity } from 'database/entities'
 import { injectable } from 'inversify'
-import { UserRepository } from 'repositories/user.repository'
+import { userRepository } from 'repositories'
 
 @injectable()
 export class AuthenticationController {
@@ -12,7 +11,7 @@ export class AuthenticationController {
     next: NextFunction
   ) {
     try {
-      const authenticationService = new AuthenticationService(new UserRepository(UserEntity))
+      const authenticationService = new AuthenticationService(userRepository)
       const user = await authenticationService.getAllUser()
       return res.send(user)
     } catch (error) {
