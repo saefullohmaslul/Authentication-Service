@@ -5,20 +5,20 @@ import { DBClient } from 'database/connection.database'
 
 @injectable()
 export class UserRepository {
-  private _dbProvider: interfaces.Provider<DBClient>
+  private provider: interfaces.Provider<DBClient>
 
   public constructor(
     @inject("Provider<DBClient>") provider: interfaces.Provider<DBClient>
   ) {
-    this._dbProvider = provider
+    this.provider = provider
   }
 
-  private async getDB() {
-    return Promise.resolve(await this._dbProvider() as DBClient)
+  private async getConnection() {
+    return Promise.resolve(await this.provider() as DBClient)
   }
 
   public async getAll() {
-    await this.getDB()
+    await this.getConnection()
     return getRepository(UserEntity).find()
   }
 }
