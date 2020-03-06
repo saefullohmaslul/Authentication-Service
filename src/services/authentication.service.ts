@@ -1,5 +1,3 @@
-import { getManager, Repository } from 'typeorm'
-import { UserEntity } from 'database/entities'
 import { injectable, inject } from 'inversify'
 import { UserRepository } from 'repositories/user.repository'
 

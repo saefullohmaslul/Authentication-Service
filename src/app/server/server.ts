@@ -3,7 +3,6 @@ import express, { Express } from 'express'
 import { createServer, Server as HTTPServer } from 'http'
 import config from 'app/config'
 import { Middleware } from 'app/middlewares'
-import { createConnection } from 'typeorm'
 const routes = require('routes/routes')
 
 export class Server {
@@ -16,15 +15,12 @@ export class Server {
   }
 
   private async initialize(): Promise<Express> {
-    const dbInit = require('app/config/db')
-    return createConnection(dbInit).then(() => {
-      this.server = express()
-      this.httpServer = createServer(this.server)
-      this.setupMiddleware(this.server)
-      this.setupRoutes(this.server)
+    this.server = express()
+    this.httpServer = createServer(this.server)
+    this.setupMiddleware(this.server)
+    this.setupRoutes(this.server)
 
-      return this.server
-    })
+    return this.server
   }
 
   private setupMiddleware(server: Express): void {
