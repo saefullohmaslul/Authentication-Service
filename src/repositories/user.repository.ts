@@ -1,4 +1,4 @@
-import { Repository, getManager } from 'typeorm'
+import { Repository, getRepository } from 'typeorm'
 import { UserEntity } from 'database/entities'
 import { injectable, inject } from 'inversify'
 
@@ -8,7 +8,7 @@ export class UserRepository {
   constructor(
     @inject(UserEntity) userEntity: typeof UserEntity
   ) {
-    this.userRepository = getManager().getRepository(userEntity)
+    this.userRepository = getRepository(userEntity)
   }
 
   public getAll() {

@@ -11,8 +11,12 @@ export class AuthenticationController {
     res: Response,
     next: NextFunction
   ) {
-    const authenticationService = new AuthenticationService(new UserRepository(UserEntity))
-    const user = await authenticationService.getAllUser()
-    res.send(user)
+    try {
+      const authenticationService = new AuthenticationService(new UserRepository(UserEntity))
+      const user = await authenticationService.getAllUser()
+      return res.send(user)
+    } catch (error) {
+      next(error)
+    }
   }
 }
