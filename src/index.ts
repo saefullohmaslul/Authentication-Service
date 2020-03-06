@@ -1,11 +1,13 @@
 require('module-alias/register')
 import 'reflect-metadata'
+
 import { Application } from 'app/server/application'
-import debug from 'debug'
+import { log } from 'app/library/debug/debugger.lib'
+
 const app: Application = new Application()
 
 app.createApplication().then(server => {
   server.listen((port: number) => {
-    debug('server:app')(`Server is listening on port: ${port}`)
+    log.debugApp(`Server is listening on port: ${port}`)
   })
 })

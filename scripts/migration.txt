@@ -1,0 +1,24 @@
+import { MigrationInterface, QueryRunner, Table } from 'typeorm'
+
+export class ${nameCapitalize}Migration${Date.now()} implements MigrationInterface {
+  async up(queryRunner: QueryRunner): Promise<any> {
+    await queryRunner.createTable(
+      new Table({
+        name: 'tbl_name',
+        columns: [
+          {
+            name: 'id',
+            type: 'uuid',
+            isPrimary: true,
+            isGenerated: true
+          },
+        ]
+      }),
+      true
+    )
+  }
+
+  async down(queryRunner: QueryRunner): Promise<any> {
+    await queryRunner.dropTable('tbl_name')
+  }
+}

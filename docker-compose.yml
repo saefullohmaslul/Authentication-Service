@@ -32,6 +32,7 @@ services:
     working_dir: /app/
     network_mode: host
     command: npm run start:watch
+    tty: true
 
   redis:
     image: redis

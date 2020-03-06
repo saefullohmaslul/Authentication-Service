@@ -13,14 +13,11 @@
     "start:prod": "cross-env DEBUG=server* NODE_ENV=production npm-run-all clean build start",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles --runInBand --verbose --coverage --forceExit --passWithNoTests",
     "test:watch": "cross-env NODE_ENV=test jest --detectOpenHandles --runInBand --verbose --coverage --forceExit --passWithNoTests --watchAll",
-    "migrate:local": "cross-env NODE_ENV=development sh scripts/migrate.sh",
-    "seeder:create": "cross-env NODE_ENV=development sh scripts/seeder.sh",
     "prepush": "npm run test",
     "typeorm": "typeorm --config dist/app/config/db/index.js",
-    "migration:create": "node scripts/migration.js",
+    "migration:create": "cross-env DEBUG=migration:* node scripts/migration.js",
     "migration:run": "npm run typeorm migration:run",
-    "seed:run": "node ./dist/database/seeds/index.js",
-    "seed": "node ./node_modules/typeorm-seeding/dist/cli.js --config dist/app/config/db/index.js seed"
+    "seed:run": "cross-env DEBUG=server:* node ./dist/database/seeds/index.js"
   },
   "_moduleAliases": {
     "schema": "./dist/schema",
@@ -64,6 +61,7 @@
     "module-alias": "^2.2.2",
     "npm-run-all": "^4.1.5",
     "pg": "^7.18.2",
+    "pluralize": "^8.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "supertest": "^4.0.2",

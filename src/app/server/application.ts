@@ -1,5 +1,6 @@
 import { Server } from 'app/server/server'
-import { Application as ExpressApplication, Express } from 'express'
+import { Express } from 'express'
+import { log } from 'app/library/debug/debugger.lib'
 
 export class Application {
   public async createApplication(): Promise<Server> {
@@ -20,11 +21,11 @@ export class Application {
 
   private throwHandling(): void {
     process.on('uncaughtException', (error: Error) => {
-      console.log(error)
+      log.debugError(error)
     })
 
     process.on('unhandledRejection', (reason: {} | null | undefined) => {
-      console.log(reason)
+      log.debugError(reason)
     })
   }
 }
