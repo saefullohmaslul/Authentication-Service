@@ -1,14 +1,15 @@
 import { Container, interfaces } from 'inversify'
 import { DBClient } from 'database/connection.database'
 import { UserRepository } from 'repositories/user.repository'
+import { AuthenticationService } from 'services/authentication.service'
 
-const kernel = new Container()
+const container = new Container()
 
 /**
  * used for repository
  */
-kernel.bind<DBClient>("DBClient").to(DBClient)
-kernel.bind<interfaces.Provider<DBClient>>("Provider<DBClient>").toProvider<DBClient>((context) => {
+container.bind<DBClient>("DBClient").to(DBClient)
+container.bind<interfaces.Provider<DBClient>>("Provider<DBClient>").toProvider<DBClient>((context) => {
   return () => {
     return new Promise<DBClient>(async (res, rej) => {
       let dbClient = context.container.get<DBClient>("DBClient")
@@ -26,6 +27,11 @@ kernel.bind<interfaces.Provider<DBClient>>("Provider<DBClient>").toProvider<DBCl
 /**
  * used for services
  */
-kernel.bind<UserRepository>(UserRepository).toSelf()
+container.bind<UserRepository>(UserRepository).toSelf()
 
-export default kernel
+/**
+ * used for controller
+ */
+container.bind<AuthenticationService>(AuthenticationService).toSelf()
+
+export default container

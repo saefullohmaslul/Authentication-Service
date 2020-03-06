@@ -3,6 +3,6 @@ import { authenticationController } from 'controllers'
 
 const router = Router()
 
-router.get('/index', authenticationController.index)
+router.get('/index', (...args) => authenticationController.index(...args))
 
 module.exports = router

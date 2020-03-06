@@ -1,4 +1,4 @@
-import kernel from 'utils/dependency-injection/container.inject'
+import container from 'utils/dependency-injection'
 import { AuthenticationService } from './authentication.service'
 
-export const authenticationService = kernel.resolve(AuthenticationService)
+export const authenticationService = container.resolve(AuthenticationService)
