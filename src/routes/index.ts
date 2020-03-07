@@ -1,8 +1,19 @@
 import { Router } from 'express'
-import { authenticationController } from 'controllers'
+import { readdir } from 'fs'
+import { ICustomRouter } from 'common/interface/routes.interface'
 
 const router = Router()
 
-router.get('/index', authenticationController.index.bind(authenticationController))
+readdir(__dirname, (error: NodeJS.ErrnoException | null, files: string[]) => {
+  if (error) throw error
+
+  files = files.filter(file => !(/^(index\.js)*$/).test(file))
+  files.map(file => {
+    const routes: any[] = require(__dirname + '/' + file).default
+    routes.map(({ method, endpoint, handler }: ICustomRouter) => {
+      (router as any)[method](endpoint, handler)
+    })
+  })
+})
 
 export default router
