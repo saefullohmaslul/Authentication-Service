@@ -3,7 +3,7 @@ import express, { Express } from 'express'
 import { createServer, Server as HTTPServer } from 'http'
 import config from 'app/config'
 import { Middleware } from 'app/middlewares'
-const routes = require('routes/routes')
+import routes from 'routes'
 
 export class Server {
   private server?: Express

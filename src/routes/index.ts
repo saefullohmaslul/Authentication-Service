@@ -3,6 +3,6 @@ import { authenticationController } from 'controllers'
 
 const router = Router()
 
-router.get('/index', (...args) => authenticationController.index(...args))
+router.get('/index', authenticationController.index.bind(authenticationController))
 
-module.exports = router
+export default router
