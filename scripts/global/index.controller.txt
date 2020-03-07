@@ -1,0 +1,26 @@
+import { Request, Response, NextFunction } from 'express'
+import { BaseService } from 'services/base.service'
+import { inject, injectable } from 'inversify'
+
+@injectable()
+export class BaseController {
+  private service: BaseService
+  constructor(
+    @inject(BaseService) baseService: BaseService
+  ) {
+    this.service = baseService
+  }
+
+  public async index(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const data = await this.service.index()
+      return res.send(data)
+    } catch (error) {
+      next(error)
+    }
+  }
+}

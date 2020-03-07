@@ -1,0 +1,15 @@
+import { injectable, inject } from 'inversify'
+import { BaseRepository } from 'repositories/base.repository'
+
+@injectable()
+export class BaseService {
+  private baseRepository: BaseRepository
+  constructor(
+    @inject(BaseRepository) baseRepository: BaseRepository) {
+    this.baseRepository = baseRepository
+  }
+
+  public index() {
+    return this.baseRepository.index()
+  }
+}
